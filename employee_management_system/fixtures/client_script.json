@@ -1,0 +1,24 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Company",
+  "enabled": 0,
+  "modified": "2025-08-08 19:55:00.789801",
+  "module": "Employee Management System",
+  "name": "calculate the number of departments and employees in the company",
+  "script": "frappe.ui.form.on('Company', {\n\trefresh(frm) {\n\t\tfrappe.call({\n\t\t    method: \"employee_management_system.employee_management.api.get_employees\",\n\t\t    args: {\n\t\t        \"company\": frm.doc.name,\n\t\t        \"department\": \"\"\n\t\t    },\n\t\t    callback: function(response) {\n\t\t        const count = response.message.length;\n\t\t        frm.set_value('custom_number_of_employees', count);\n\n\t\t        \n\t\t        frappe.call({\n\t\t            method: \"frappe.client.get_list\",\n\t\t            args: {\n\t\t                doctype: \"Department\",\n\t\t                filters: {\n\t\t                    company: frm.doc.name\n\t\t                }\n\t\t            },\n\t\t            callback: function(deptRes) {\n\t\t                const deptsCount = deptRes.message.length;\n\t\t                frm.set_value('custom_number_of_departments', deptsCount);\n\t\t                frm.save();  \n\t\t            }\n\t\t        });\n\t\t    }\n\t\t});\n\t}\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 0,
+  "modified": "2025-08-07 21:42:53.154201",
+  "module": "Employee Management System",
+  "name": "calculate the number of days an employee has been with the company based on the hiring date",
+  "script": "frappe.ui.form.on('Employee', {\n\trefresh(frm) {\n\t\t// your code here\n\t\t if (frm.doc.date_of_joining) {\n            const joining_date = frappe.datetime.str_to_obj(frm.doc.date_of_joining);\n            const today = frappe.datetime.now_date();\n            const today_date = frappe.datetime.str_to_obj(today);\n\n            const diff_time = today_date - joining_date;\n            const diff_days = diff_time / (1000 * 60 * 60 * 24);\n            console.log('diff_days',diff_days)\n             console.log('diff_time',diff_time)\n             console.log('today_date',today_date)\n             console.log('joining_date',joining_date)\n            \n            frm.set_value('custom_days_employed', Math.floor(diff_days));\n        }\n\t}\n})",
+  "view": "Form"
+ }
+]

@@ -145,6 +145,16 @@ app_license = "mit"
 # 	}
 # }
 
+doc_events = {
+    "Employee": {
+        "validate": "employee_management_system.employee_management.utils.calculate_employment_days",
+        "on_update  ": "employee_management_system.employee_management.utils.calculate_employment_days",
+        
+        
+        
+    }
+}
+
 # Scheduled Tasks
 # ---------------
 
@@ -242,3 +252,17 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            ["dt", "in", ["Department","Company","Employee"]]
+        ]
+    },
+    {
+        "doctype": "Client Script",
+        "filters": [
+            ["module", "in", ["Employee Management System"]]
+        ]
+    }
+]

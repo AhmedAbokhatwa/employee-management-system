@@ -46,7 +46,7 @@ bench --site employee_management.com migrate
 
 1. **Clone the frontend application**
    ```bash
-   git clone <frontend-repo-url>
+   git clone https://github.com/AhmedAbokhatwa/EMS-Vue.git
    cd employee-management-frontend
    ```
 
