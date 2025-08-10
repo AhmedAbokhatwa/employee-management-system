@@ -252,6 +252,8 @@ doc_events = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+after_migrate = "employee_management_system.employee_management.setup_config.run"
+
 fixtures = [
     {
         "doctype": "Custom Field",
@@ -272,3 +274,4 @@ fixtures = [
         ]
     }
 ]
+

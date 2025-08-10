@@ -30,7 +30,7 @@ def authenticated_user(name, password):
             "user": user.name,
             "email": user.email,    
             "user_type": user.user_type,
-            "role":user.role_profile_name,
+            "role":frappe.get_roles(user.email),
         }
 
         # Ensure Set-Cookie is attached
