@@ -264,5 +264,11 @@ fixtures = [
         "filters": [
             ["module", "in", ["Employee Management System"]]
         ]
+    },
+    {
+        "doctype": "DocType",
+        "filters":[
+            ["module","in",["Employee Management System"]]
+        ]
     }
 ]
